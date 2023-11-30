@@ -10,9 +10,14 @@ type GlobalProviderProps = {
   children: ReactNode;
 }
 
+export enum ActionTypes {
+  SET_PHOTOS = 'SET_PHOTOS',
+  SET_SELECTED_LAYOUT = 'SET_SELECTED_LAYOUT',
+}
+
 export type Action =
-  | { type: 'SET_PHOTOS'; payload: TPhoto[] }
-  | { type: 'SET_SELECTED_LAYOUT'; payload: string };
+  | { type: ActionTypes.SET_PHOTOS; payload: TPhoto[] }
+  | { type: ActionTypes.SET_SELECTED_LAYOUT; payload: string };
 
 const initialState: GlobalState = {
   photos: [],
@@ -21,9 +26,9 @@ const initialState: GlobalState = {
 
 const reducer = (state: GlobalState, action: Action): GlobalState => {
   switch (action.type) {
-    case 'SET_PHOTOS':
+    case ActionTypes.SET_PHOTOS:
       return { ...state, photos: action.payload };
-    case 'SET_SELECTED_LAYOUT':
+    case ActionTypes.SET_SELECTED_LAYOUT:
       return { ...state, selectedLayout: action.payload };
     default:
       return state;
@@ -39,7 +44,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const photos = usePhotos();
 
   useEffect(() => {
-    dispatch({ type: 'SET_PHOTOS', payload: photos });
+    dispatch({ type: ActionTypes.SET_PHOTOS, payload: photos });
   }, [photos]);
 
   return <GlobalContext.Provider value={{ state, dispatch }}>{children}</GlobalContext.Provider>;

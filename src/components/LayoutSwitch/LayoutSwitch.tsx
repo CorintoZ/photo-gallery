@@ -1,12 +1,12 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { useGlobalContext } from '../../context/store';
+import { ActionTypes, useGlobalContext } from '../../context/store';
 
-export const LayoutSwitch = () => {
+const LayoutSwitch = () => {
   const {state, dispatch} = useGlobalContext();
   const {selectedLayout} = state;
 
   const handleLayoutChange = (event: SelectChangeEvent<string>) => {
-    dispatch({ type: 'SET_SELECTED_LAYOUT', payload: event.target.value });
+    dispatch({ type: ActionTypes.SET_SELECTED_LAYOUT, payload: event.target.value });
   };
 
   return (
@@ -17,6 +17,7 @@ export const LayoutSwitch = () => {
         value={selectedLayout}
         label="Select Layout"
         onChange={handleLayoutChange}
+        sx={{color: '#b4befe' }}
       >
         <MenuItem value={'grid'}>Grid</MenuItem>
         <MenuItem value={'list'}>List</MenuItem>
@@ -26,3 +27,5 @@ export const LayoutSwitch = () => {
     </>
   )
 }
+
+export default LayoutSwitch;
