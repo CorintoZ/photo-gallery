@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React from 'react';
 import { TPhoto } from '../../hooks/usePhotos';
-import Photo from '../Photo/Photo';
+import PhotoCard from '../PhotoCard/PhotoCard';
 import { Carousel } from 'react-responsive-carousel'
 import { styled } from 'styled-components';
 
@@ -20,9 +20,7 @@ const PhotoCarousel: React.FC<CarouselProps> = ({ photos }) => {
     <StyledBox sx={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
       <Carousel>
         {photos.map((photo, index) => (
-          <div>
-           <Photo key={index} description={photo.description} imageUrl={photo.url}/>
-          </div>
+           <PhotoCard key={index} description={photo.description} imageUrl={photo.url}/>
         ))}
       </Carousel>
     </StyledBox>
